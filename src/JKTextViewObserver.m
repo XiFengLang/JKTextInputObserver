@@ -30,12 +30,22 @@ static const NSInteger kUserNameMaxLength = 8;
 
 - (instancetype)initWithTextView:(UITextView *)textView {
     if (self = [super init]) {
-        textView.accessibilityIdentifier = [NSString stringWithFormat:@"%p",self];
-        self.memoryAddress = textView.accessibilityIdentifier;
+        self.textView = textView;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChangeText:) name:UITextViewTextDidChangeNotification object:nil];
-        _textView = textView;
     }return self;
 }
+
+
+- (void)setTextView:(UITextView *)textView {
+    _textView = textView;
+    if (textView) {
+        textView.accessibilityIdentifier = [NSString stringWithFormat:@"%p",self];
+        self.memoryAddress = textView.accessibilityIdentifier;
+    } else {
+        self.memoryAddress = nil;
+    }
+}
+
 
 - (BOOL)jk_textView:(UITextView *)textView range:(NSRange)range shouldChangeString:(NSString *)string {
     if ([textView.accessibilityIdentifier isEqualToString:self.memoryAddress] == NO) {
@@ -68,7 +78,7 @@ static const NSInteger kUserNameMaxLength = 8;
 - (void)textViewDidChangeText:(NSNotification *)notification{
     // 限制输入文字的长度，兼容表情和拼音，http://www.jianshu.com/p/2d1c06f2dfa4
     UITextView *textView = (UITextView *)notification.object;
-    if ([textView.accessibilityIdentifier isEqualToString:self.memoryAddress]) {
+    if (self.textView && [textView.accessibilityIdentifier isEqualToString:self.memoryAddress]) {
         
         // 过滤掉Emoji
         if ([textView.text hasEmoji]) {

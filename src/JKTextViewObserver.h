@@ -6,7 +6,7 @@
 //  Copyright © 2016年 溪枫狼. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 
 @protocol JKTextViewObserverDelegate <NSObject>
@@ -30,7 +30,7 @@
 + (instancetype)new NS_UNAVAILABLE;
 
 
-@property (nonatomic, strong, readonly) UITextView * textView;
+@property (nonatomic, strong) UITextView * textView;
 
 
 /**

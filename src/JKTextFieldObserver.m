@@ -27,12 +27,22 @@ static const NSInteger kUserNameMaxLength = 8;
 
 - (instancetype)initWithTextField:(UITextField *)textField{
     if (self = [super init]) {
-        textField.accessibilityIdentifier = [NSString stringWithFormat:@"%p",self];
-        self.memoryAddress = textField.accessibilityIdentifier;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChangeText:) name:UITextFieldTextDidChangeNotification object:nil];
-        _textField = textField;
+        self.textField = textField;
     }return self;
 }
+
+
+- (void)setTextField:(UITextField *)textField {
+    _textField = textField;
+    if (textField) {
+        textField.accessibilityIdentifier = [NSString stringWithFormat:@"%p",self];
+        self.memoryAddress = textField.accessibilityIdentifier;
+    } else {
+        self.memoryAddress = nil;
+    }
+}
+
 
 - (BOOL)jk_textField:(UITextField *)textField range:(NSRange)range shouldChangeString:(NSString *)string {
     if ([textField.accessibilityIdentifier isEqualToString:self.memoryAddress] == NO) {
@@ -65,7 +75,7 @@ static const NSInteger kUserNameMaxLength = 8;
 - (void)textFieldDidChangeText:(NSNotification *)notification{
     // 限制输入文字的长度，兼容表情和拼音，http://www.jianshu.com/p/2d1c06f2dfa4
     UITextField *textField = (UITextField *)notification.object;
-    if ([textField.accessibilityIdentifier isEqualToString:self.memoryAddress]) {
+    if (self.textField && [textField.accessibilityIdentifier isEqualToString:self.memoryAddress]) {
         
         // 过滤掉Emoji
         if ([textField.text hasEmoji]) {

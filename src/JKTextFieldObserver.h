@@ -5,7 +5,7 @@
 //  Created by 蒋鹏 on 16/9/18.
 //  Copyright © 2016年 溪枫狼. All rights reserved.
 //
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 
 /****************************************************************************************
@@ -53,7 +53,7 @@
 + (instancetype)new NS_UNAVAILABLE;
 
 
-@property (nonatomic, strong, readonly) UITextField * textField;
+@property (nonatomic, strong) UITextField * textField;
 
 
 /**
