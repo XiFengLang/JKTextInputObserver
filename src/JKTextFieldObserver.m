@@ -18,7 +18,7 @@
 
 @implementation JKTextFieldObserver
 
-static const NSInteger kUserNameMaxLength = 8;
+static const NSInteger kUserNameMaxLength = 11;
 
 
 + (instancetype)observerWithTextField:(UITextField *)textField{

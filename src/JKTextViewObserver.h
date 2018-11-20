@@ -39,7 +39,7 @@
 @property (nonatomic, copy) NSString * matchRegular;
 
 
-/**    限制长度 (默认8个字符)    */
+/**    限制长度 (默认11个字符)    */
 @property (nonatomic, assign)NSInteger maximumLength;
 
 

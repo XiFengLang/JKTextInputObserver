@@ -21,7 +21,7 @@
 
 @implementation JKTextViewObserver
 
-static const NSInteger kUserNameMaxLength = 8;
+static const NSInteger kUserNameMaxLength = 11;
 
 
 + (instancetype)observerWithTextView:(UITextView *)textView {
