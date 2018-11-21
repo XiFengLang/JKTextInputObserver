@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @protocol JKTextInputObserverDelegate <NSObject>
 @optional
@@ -44,7 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- 正则匹配规则，限制内容输入    数字^[0-9]\\d*$    英文+数字@"^[A-Za-z0-9]+$"
+ 正则匹配规则，限制内容输入    数字^[0-9]\\d*$    英文+数字@"^[A-Za-z0-9]+$" \
+ 通用的正则表达式：正英文+数字+$·字符，iOS11.4.1+系统输入法输入汉字会单个字符是 ➋-➒ \
+ @"^[&\\· a-zA-Z\u4E00-\u9FA5\\u0030-\\u0039➋-➒]+$";
  */
 @property (nonatomic, copy) NSString * matchRegular;
 
@@ -112,4 +113,3 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END

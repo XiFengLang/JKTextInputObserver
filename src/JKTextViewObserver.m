@@ -3,7 +3,7 @@
 //  
 //
 //  Created by 蒋鹏 on 16/9/18.
-//  Copyright © 2016年 www.sinterchina.com. All rights reserved.
+//  Copyright © 2016年 溪枫狼. All rights reserved.
 //
 
 #import "JKTextViewObserver.h"

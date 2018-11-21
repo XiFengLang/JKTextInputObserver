@@ -156,7 +156,7 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         self.memoryAddress = nil;
     }
     
-    if (self.isObserveTextField == false) {
+    if (self.isObserveTextField == true) {
         NSLog(@"======================== JKTextInputObserver  =========================");
         NSLog(@"============Error: 使用initWithTextField:实例后只能设置textField============");
         NSLog(@"======================== JKTextInputObserver  =========================");
