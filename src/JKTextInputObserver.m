@@ -11,8 +11,8 @@
 
 @interface JKTextInputObserver ()
 
-@property (nonatomic, copy) NSString * memoryAddress;
-@property (nonatomic, assign) BOOL isObserveTextField;
+@property (nonatomic, copy) NSString * memoryAddress;/**<  被监听对象的内存地址  */
+@property (nonatomic, assign) BOOL isObserveTextField;/**<  当前实例对象只能单独监听TextFeild或TextView  */
 
 @end
 
@@ -34,6 +34,7 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChangeText:) name:UITextFieldTextDidChangeNotification object:nil];
         self.isObserveTextField = true;
         self.textField = textField;
+        self.maximumLength = kTextInputObserverDefaultLength;
     }return self;
 }
 
@@ -60,6 +61,8 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         return YES;
     } else if (range.length >= 1 && [string isEqualToString:@""]) {
         return YES;// 删除
+    } else if (textField.text.length >= self.maximumLength) {
+        return false;
     } else if (
                (range.length != 1 && [string isEqualToString:@""]) ||
                ([string isEqualToString:@""] &&
@@ -103,10 +106,7 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         if (!position){
             
             // 长度
-            NSInteger maxLenght = kTextInputObserverDefaultLength;
-            if (self.maximumLength) {
-                maxLenght = self.maximumLength;
-            }
+            NSInteger maxLenght = self.maximumLength;
             
             if (toBeString.length > maxLenght){
                 NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:maxLenght];
@@ -143,6 +143,7 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         self.textView = textView;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChangeText:) name:UITextViewTextDidChangeNotification object:nil];
         self.isObserveTextField = false;
+        self.maximumLength = kTextInputObserverDefaultLength;
     }return self;
 }
 
@@ -169,6 +170,8 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         return YES;
     } else if (range.length >= 1 && [string isEqualToString:@""]) {
         return YES;// 删除
+    } else if (textView.text.length >= self.maximumLength) {
+        return false;
     } else if (
                (range.length != 1 && [string isEqualToString:@""]) ||
                ([string isEqualToString:@""] &&
@@ -212,10 +215,7 @@ static const NSInteger kTextInputObserverDefaultLength = 11;
         if (!position){
             
             // 长度
-            NSInteger maxLenght = kTextInputObserverDefaultLength;
-            if (self.maximumLength) {
-                maxLenght = self.maximumLength;
-            }
+            NSInteger maxLenght = self.maximumLength;
             
             if (toBeString.length > maxLenght){
                 NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:maxLenght];

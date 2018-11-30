@@ -9,6 +9,6 @@ platform :ios, '8.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'JKTextInputObserver', '~> 1.0.0'
+pod 'JKTextInputObserver', '~> 1.0.5'
 
 ```
